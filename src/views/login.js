@@ -1,0 +1,20 @@
+import { html, render } from "../../node_modules/lit-html/lit-html.js";
+
+const rootElement = document.getElementById('root');
+
+const loginTemplate = () => html`
+<section id="login">
+            <article>
+                <h2>Login</h2>
+                <form id="loginForm">
+                    <label>E-mail: <input type="text" name="email"></label>
+                    <label>Password: <input type="password" name="password"></label>
+                    <input type="submit" value="Login">
+                </form>
+            </article>
+        </section>
+`
+
+export const loginView = (ctx) => {
+    render(loginTemplate(), rootElement)
+}
