@@ -1,6 +1,4 @@
-import { html, render } from "../../node_modules/lit-html/lit-html.js";
-
-const rootElement = document.getElementById('root');
+import { html } from "../../node_modules/lit-html/lit-html.js";
 
 const registerTemplate = () => html`
 <section id="register">
@@ -17,5 +15,5 @@ const registerTemplate = () => html`
 `
 
 export const registerView = (ctx) => {
-    render(registerTemplate(), rootElement)
+    ctx.render(registerTemplate())
 }

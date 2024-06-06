@@ -1,6 +1,4 @@
-import { html, render } from "../../node_modules/lit-html/lit-html.js";
-
-const rootElement = document.getElementById('root');
+import { html } from "../../node_modules/lit-html/lit-html.js";
 
 const catalogTemplate = () => html`
 <section id="catalog">
@@ -57,5 +55,5 @@ const catalogTemplate = () => html`
 `
 
 export const catalogView = (ctx) => {
-    render(catalogTemplate(), rootElement)
+    ctx.render(catalogTemplate())
 }

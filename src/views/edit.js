@@ -1,6 +1,4 @@
-import { html, render } from "../../node_modules/lit-html/lit-html.js";
-
-const rootElement = document.getElementById('root');
+import { html } from "../../node_modules/lit-html/lit-html.js";
 
 const editTemplate = () => html`
 <section id="edit">
@@ -21,5 +19,5 @@ const editTemplate = () => html`
 `
 
 export const editView = (ctx) => {
-    render(editTemplate(), rootElement)
+    ctx.render(editTemplate())
 }

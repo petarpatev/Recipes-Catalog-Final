@@ -1,4 +1,7 @@
 import page from "../node_modules/page/page.mjs";
+
+import { decorateContext } from "./middlewares/render.js";
+
 import { catalogView } from "./views/catalog.js";
 import { createView } from "./views/create.js";
 import { detailsView } from "./views/details.js";
@@ -7,6 +10,7 @@ import { homeView } from "./views/home.js";
 import { loginView } from "./views/login.js";
 import { registerView } from "./views/register.js";
 
+page(decorateContext);
 page('/', homeView);
 page('/catalog', catalogView);
 page('/login', loginView);
