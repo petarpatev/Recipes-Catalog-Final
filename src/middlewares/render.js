@@ -1,7 +1,7 @@
 import { render } from "../../node_modules/lit-html/lit-html.js";
 
 const rootElement = document.getElementById('root');
-const spinnerElement = document.querySelector('#spinner');
+const spinnerElement = document.querySelector('.lds-roller');
 
 const showSpinner = () => {
     spinnerElement.style.display = '';
