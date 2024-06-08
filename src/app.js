@@ -2,6 +2,7 @@ import page from "../node_modules/page/page.mjs";
 
 import { logout } from "./api/user.js";
 
+import { preload } from "./middlewares/preload.js";
 import { decorateContext } from "./middlewares/render.js";
 import { addSession } from "./middlewares/session.js";
 import { updateNav } from "./middlewares/updateNav.js";
@@ -22,7 +23,7 @@ page('/catalog', catalogView);
 page('/login', loginView);
 page('/register', registerView);
 page('/create', createView);
-page('/details/:recipeId', detailsView);
+page('/details/:recipeId', preload, detailsView);
 page('/edit', editView);
 
 page.start();

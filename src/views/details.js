@@ -1,5 +1,5 @@
-import { html } from "../../node_modules/lit-html/lit-html.js";
-import * as recipeService from "../api/recipe.js";
+
+import { html, nothing } from "../../node_modules/lit-html/lit-html.js";
 
 const detailsTemplate = (recipe) => html`
 <section id="details">
@@ -22,16 +22,16 @@ const detailsTemplate = (recipe) => html`
         ${recipe.steps.map(s => html`<p>${s}</p>`)}
     </div>
 
-    <div class="controls">
-        <a class="actionLink" href="/edit/${recipe._id}">✎ Edit</a>
-        <a class="actionLink" href="javascript:void(0)">✖ Delete</a>
-    </div>
+    ${recipe._isOwner ? html`
+        <div class="controls">
+            <a class="actionLink" href="/edit/${recipe._id}">✎ Edit</a>
+            <a class="actionLink" href="javascript:void(0)">✖ Delete</a>
+        </div>` : nothing}
 </article>
 </section>
 `
 
 export const detailsView = async (ctx) => {
-    const recipeId = ctx.params.recipeId;
-    const recipe = await recipeService.getById(recipeId);
+    const recipe = ctx.recipe;
     ctx.render(detailsTemplate(recipe));
 }
