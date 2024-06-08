@@ -1,10 +1,11 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
+import { createRecipe } from "../api/recipe.js";
 
-const createTemplate = () => html`
+const createTemplate = (onSubmit) => html`
 <section id="create">
             <article>
                 <h2>New Recipe</h2>
-                <form id="createForm">
+                <form id="createForm" @submit=${onSubmit}>
                     <label>Name: <input type="text" name="name" placeholder="Recipe name"></label>
                     <label>Image: <input type="text" name="img" placeholder="Image URL"></label>
                     <label class="ml">Ingredients: <textarea name="ingredients"
@@ -18,5 +19,20 @@ const createTemplate = () => html`
 `
 
 export const createView = (ctx) => {
-    ctx.render(createTemplate())
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+        const name = formData.get('name');
+        const img = formData.get('img');
+        const ingredients = formData.get('ingredients').split('\n');
+        const steps = formData.get('steps').split('\n');
+
+        const newRecipe = await createRecipe({ name, img, ingredients, steps });
+        e.target.reset();
+        ctx.page.redirect(`/details/${newRecipe._id}`);
+    }
+
+    ctx.render(createTemplate(onSubmit));
 }
