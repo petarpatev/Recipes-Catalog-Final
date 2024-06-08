@@ -1,5 +1,7 @@
 import page from "../node_modules/page/page.mjs";
 
+import { logout } from "./api/user.js";
+
 import { decorateContext } from "./middlewares/render.js";
 import { addSession } from "./middlewares/session.js";
 import { updateNav } from "./middlewares/updateNav.js";
@@ -24,3 +26,9 @@ page('/details/:recipeId', detailsView);
 page('/edit', editView);
 
 page.start();
+
+//Logout
+document.getElementById('logoutBtn').addEventListener('click', () => {
+    logout();
+    page.redirect('/login');
+});
