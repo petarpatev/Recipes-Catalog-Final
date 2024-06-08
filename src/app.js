@@ -20,7 +20,7 @@ page('/catalog', catalogView);
 page('/login', loginView);
 page('/register', registerView);
 page('/create', createView);
-page('/details', detailsView);
+page('/details/:recipeId', detailsView);
 page('/edit', editView);
 
 page.start();

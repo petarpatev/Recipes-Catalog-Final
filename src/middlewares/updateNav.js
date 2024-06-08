@@ -1,5 +1,4 @@
 const links = {
-    '/': document.querySelector('h1 a'),
     '/catalog': document.getElementById('catalogLink'),
     '/create': document.getElementById('createLink'),
     '/login': document.getElementById('loginLink'),
@@ -12,8 +11,11 @@ const userBtns = document.getElementById('user');
 
 export const updateNav = (ctx, next) => {
     Object.values(links).forEach(button => button.classList.remove('active'));
+
     let currentBtn = links[ctx.pathname];
-    currentBtn.classList.add('active');
+    if (currentBtn) {
+        currentBtn.classList.add('active');
+    }
 
     const user = ctx.user;
     if (user) {
