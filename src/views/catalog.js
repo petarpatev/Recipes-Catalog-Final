@@ -1,4 +1,4 @@
-import { html } from "../../node_modules/lit-html/lit-html.js";
+import { html, nothing } from "../../node_modules/lit-html/lit-html.js";
 import * as recipeService from "../api/recipe.js";
 
 const recipeTemplate = (recipe) => html`
@@ -14,7 +14,7 @@ const recipeTemplate = (recipe) => html`
             </a>
 `
 
-const catalogTemplate = (recipes) => html`
+const catalogTemplate = (recipes, page, pages) => html`
 <section id="catalog">
             <div class="section-title">
                 <form id="searchForm">
@@ -23,23 +23,24 @@ const catalogTemplate = (recipes) => html`
                 </form>
             </div>
             <header class="section-title">
-                Page
-                1 of 1 
+                Page ${page} of ${pages} 
+                ${page != 1 ? html`<a class="pager" href="/catalog?page=${page - 1}">&lt;Prev</a>` : nothing}
+                ${page < pages ? html`<a class="pager" href="/catalog?page=${page + 1}">Next&gt;</a>` : nothing}
             </header>
 
             ${recipes.map(recipeTemplate)}
 
 
             <footer class="section-title">
-
-                Page
-                    1 of 1
+                Page ${page} of ${pages}
             </footer>
         </section>
 `
 
 export const catalogView = async (ctx) => {
 
-    const recipes = await recipeService.getAll();
-    ctx.render(catalogTemplate(recipes))
+    const query = new URLSearchParams(ctx.querystring);
+    const page = Number(query.get('page')) || 1;
+    const { recipes, pages } = await recipeService.getAll(page);
+    ctx.render(catalogTemplate(recipes, page, pages))
 }
