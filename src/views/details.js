@@ -1,7 +1,8 @@
 
 import { html, nothing } from "../../node_modules/lit-html/lit-html.js";
+import { deleteRecipe } from "../api/recipe.js";
 
-const detailsTemplate = (recipe) => html`
+const detailsTemplate = (recipe, deleteHandler) => html`
 <section id="details">
 
 <article>
@@ -25,13 +26,20 @@ const detailsTemplate = (recipe) => html`
     ${recipe._isOwner ? html`
         <div class="controls">
             <a class="actionLink" href="/edit/${recipe._id}">✎ Edit</a>
-            <a class="actionLink" href="javascript:void(0)">✖ Delete</a>
+            <a class="actionLink" href="javascript:void(0)" @click=${deleteHandler}>✖ Delete</a>
         </div>` : nothing}
 </article>
 </section>
 `
 
 export const detailsView = async (ctx) => {
+
     const recipe = ctx.recipe;
-    ctx.render(detailsTemplate(recipe));
+
+    const deleteHandler = () => {
+        deleteRecipe(recipe._id);
+        ctx.page.redirect('/catalog');
+    }
+    
+    ctx.render(detailsTemplate(recipe, deleteHandler));
 }

@@ -14,6 +14,10 @@ export const createRecipe = async (data) => {
     return api.post(endpoints.create, data);
 }
 
+export const deleteRecipe = async (id) => {
+    return api.del(endpoints.getById + id)
+}
+
 export const getLastThree = async () => {
     return api.get(endpoints.lastThree);
 }
