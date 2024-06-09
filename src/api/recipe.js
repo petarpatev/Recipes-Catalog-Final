@@ -18,6 +18,10 @@ export const deleteRecipe = async (id) => {
     return api.del(endpoints.getById + id)
 }
 
+export const editRecipe = async (id, newData) => {
+    return api.put(endpoints.getById + id, newData)
+}
+
 export const getLastThree = async () => {
     return api.get(endpoints.lastThree);
 }

@@ -24,7 +24,7 @@ page('/login', loginView);
 page('/register', registerView);
 page('/create', createView);
 page('/details/:recipeId', preload, detailsView);
-page('/edit', editView);
+page('/edit/:recipeId', preload, editView);
 
 page.start();
 
